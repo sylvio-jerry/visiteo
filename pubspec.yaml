@@ -1,0 +1,27 @@
+name: visiteo
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: ">=3.1.2 <4.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  get_cli: ^1.8.4
+  get: 4.6.6
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.9
+  smooth_page_indicator: ^1.1.0
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  # assets
+  assets:
+    - assets/images/
