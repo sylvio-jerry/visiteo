@@ -5,10 +5,16 @@ abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
   static const ON_BOARDING = _Paths.ON_BOARDING;
+  static const TARIF = _Paths.TARIF;
+  static const FORMULAIRE = _Paths.FORMULAIRE;
+  static const VISITOR_LIST = _Paths.VISITOR_LIST;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
   static const ON_BOARDING = '/on-boarding';
+  static const TARIF = '/tarif';
+  static const FORMULAIRE = '/formulaire';
+  static const VISITOR_LIST = '/visitor-list';
 }

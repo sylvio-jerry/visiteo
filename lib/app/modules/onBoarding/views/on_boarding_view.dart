@@ -7,7 +7,7 @@ import 'package:visiteo/themes/app_color.dart';
 import '../controllers/on_boarding_controller.dart';
 
 class OnBoardingView extends GetView<OnBoardingController> {
-  OnBoardingView({Key? key}) : super(key: key);
+  const OnBoardingView({Key? key}) : super(key: key);
 
   // final pages = Get.find<OnBoardingController>().pages;
 
@@ -50,28 +50,26 @@ class OnBoardingView extends GetView<OnBoardingController> {
       bottomSheet: Container(
         color: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GetBuilder<OnBoardingController>(builder: (state) {
-                // if (state.currentPage == 0) return const SizedBox.shrink();
-                return ElevatedButton(
-                  onPressed: controller.previousPage,
-                  child: const Text('Précédent'),
-                );
-              }),
-              //Next Button
-              GetBuilder<OnBoardingController>(builder: (state) {
-                return ElevatedButton(
-                  onPressed: state.nextPage,
-                  child: Text(state.currentPage == state.pages.length - 1
-                      ? 'Commencer'
-                      : 'Suivant'),
-                );
-              })
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GetBuilder<OnBoardingController>(builder: (state) {
+              // if (state.currentPage == 0) return const SizedBox.shrink();
+              return ElevatedButton(
+                onPressed: controller.previousPage,
+                child: const Text('Précédent'),
+              );
+            }),
+            //Next Button
+            GetBuilder<OnBoardingController>(builder: (state) {
+              return ElevatedButton(
+                onPressed: state.nextPage,
+                child: Text(state.currentPage == state.pages.length - 1
+                    ? 'Commencer'
+                    : 'Suivant'),
+              );
+            })
+          ],
         ),
       ),
     );
@@ -96,7 +94,6 @@ class OnboardingItem extends GetView<OnBoardingController> {
           width: 250,
           fit: BoxFit.cover,
         ),
-
         const SizedBox(height: 15),
         Text(
           item.title,

@@ -49,7 +49,6 @@ class OnBoardingController extends GetxController {
     super.onInit();
     pageController.addListener(() {
       currentPage = pageController.page!.round();
-      log("info $currentPage");
       update();
     });
   }
