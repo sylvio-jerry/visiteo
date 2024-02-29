@@ -13,7 +13,7 @@ class FormulaireView extends GetView<FormulaireController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondaryLight,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -106,7 +106,10 @@ class FormulaireView extends GetView<FormulaireController> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Numero"),
+                            Text(
+                              "Numero",
+                              style: TextStyle(color: AppColor.textColorLight),
+                            ),
                             SizedBox(
                               width: 25,
                               child: Divider(
@@ -122,7 +125,10 @@ class FormulaireView extends GetView<FormulaireController> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5.0),
                               color: Colors.white),
-                          child: const Text("vst-001"),
+                          child: Text(
+                            "vst-001",
+                            style: TextStyle(color: AppColor.textColorLight),
+                          ),
                         ),
                       ],
                     ),

@@ -14,7 +14,8 @@ class VisitorListView extends GetView<VisitorListController> {
     return Scaffold(
       // extendBody: true,
       // extendBodyBehindAppBar: true,
-      backgroundColor: AppColor.secondaryLight,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      // backgroundColor: AppColor.secondaryLight,
       body: Column(
         children: [
           Container(
@@ -49,14 +50,16 @@ class VisitorListView extends GetView<VisitorListController> {
               padding: const EdgeInsets.only(left: 20, top: 8),
               margin: const EdgeInsets.symmetric(horizontal: 30),
               decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade300,
-                        blurRadius: 20.0,
-                        offset: const Offset(0, 10.0))
-                  ],
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.white),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 20.0,
+                      offset: const Offset(0, 10.0))
+                ],
+                borderRadius: BorderRadius.circular(10.0),
+                // color: Colors.white,
+                color: AppColor.white,
+              ),
               child: TextField(
                 decoration: InputDecoration(
                     suffixIcon: Icon(
@@ -65,7 +68,8 @@ class VisitorListView extends GetView<VisitorListController> {
                       size: 20.0,
                     ),
                     border: InputBorder.none,
-                    // hintStyle: TextStyle(color: Theme.of(context).hintColor),
+                    hintStyle: TextStyle(
+                        color: Theme.of(context).hintColor, fontSize: 14),
                     hintText: 'Rechercher'),
               ),
             ),

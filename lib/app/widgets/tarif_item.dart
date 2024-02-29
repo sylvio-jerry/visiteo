@@ -52,13 +52,11 @@ class TarifItem extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  // color: Colors.yellow,
                   width: Get.width,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
                         padding: const EdgeInsets.all(5.0),
@@ -124,7 +122,10 @@ class TarifItem extends StatelessWidget {
       showDragHandle: true,
       enableDrag: true,
       isDismissible: true,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
+      ),
       context: context,
       builder: (BuildContext context) {
         return TarifInformation(tarif: tarif);

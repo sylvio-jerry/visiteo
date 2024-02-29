@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:visiteo/themes/app_color.dart';
 
 class CustomDateFormField extends StatefulWidget {
   const CustomDateFormField({
@@ -50,10 +51,16 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
           decoration: InputDecoration(
             fillColor: Colors.white,
             hintText: widget.hintText,
-            hintStyle: const TextStyle(fontSize: 13),
+            hintStyle:
+                TextStyle(color: Theme.of(context).hintColor, fontSize: 14),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            prefixIcon: widget.iconData != null ? Icon(widget.iconData) : null,
+            prefixIcon: widget.iconData != null
+                ? Icon(
+                    widget.iconData,
+                    color: Theme.of(context).colorScheme.primary,
+                  )
+                : null,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.grey.shade400,

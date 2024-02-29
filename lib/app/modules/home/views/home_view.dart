@@ -9,7 +9,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondaryLight,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -21,16 +21,23 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              controller.changeTheme();
-            },
-            icon: const Icon(Icons.light_mode, color: Colors.black),
-          )
+          //toogle theme
+          GetBuilder<HomeController>(builder: (state) {
+            return IconButton(
+              onPressed: () {
+                controller.toggleTheme();
+              },
+              icon: Icon(
+                state.isDarkMode.value ? Icons.light_mode : Icons.dark_mode,
+                color: Colors.black,
+              ),
+            );
+          })
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
         index: controller.selectedIndex,
+        height: 65.0,
         items: [
           Icon(
             Icons.list_rounded,
@@ -48,8 +55,8 @@ class HomeView extends GetView<HomeController> {
             color: Colors.black.withOpacity(.6),
           )
         ],
-        backgroundColor: AppColor.secondaryLight,
-        color: AppColor.primaryLight.withOpacity(.2),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.primary.withOpacity(.5),
         animationDuration: const Duration(milliseconds: 300),
         onTap: (index) => controller.handleBottomNav(index),
       ),

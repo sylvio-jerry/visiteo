@@ -148,7 +148,7 @@ class TarifInformation extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text("Nom "),
+                                      const Text("Nom"),
                                       SizedBox(
                                         width: 15,
                                         child: Divider(
@@ -170,9 +170,9 @@ class TarifInformation extends StatelessWidget {
                                               scrollDirection: Axis.horizontal,
                                               child: Text(
                                                 "John legend ddddddddddddd",
-                                                style: TextStyle(
-                                                  color: AppColor.bodyColorDark,
-                                                ),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyMedium,
                                               ),
                                             ),
                                           ),
@@ -207,11 +207,8 @@ class TarifInformation extends StatelessWidget {
                                     ),
                                     child: Text(
                                       "123545 Ariary",
-                                      style: TextStyle(
-                                        color: AppColor.bodyColorDark,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 14,
-                                      ),
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
                                   ),
                                 ],
@@ -241,11 +238,8 @@ class TarifInformation extends StatelessWidget {
                                     ),
                                     child: Text(
                                       "69523 Ariary",
-                                      style: TextStyle(
-                                        color: AppColor.bodyColorDark,
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 14,
-                                      ),
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
                                   ),
                                 ],

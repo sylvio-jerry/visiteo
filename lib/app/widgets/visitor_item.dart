@@ -11,12 +11,13 @@ class VisitorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      // height: 90,
+      // height: 100,
       padding: const EdgeInsets.all(10.0),
       margin: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: AppColor.bodyColorLight),
+        borderRadius: BorderRadius.circular(10.0),
+        color: Theme.of(context).colorScheme.background,
+      ),
       child: Row(
         children: [
           //date box
@@ -82,13 +83,18 @@ class VisitorItem extends StatelessWidget {
                                 visitor.nom,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
                           ],
                         ),
                         Container(
-                            margin: const EdgeInsets.only(top: 5.0),
-                            child: Text("${visitor.nombreJour} Jours")),
+                          margin: const EdgeInsets.only(top: 5.0),
+                          child: Text(
+                            "${visitor.nombreJour} Jours",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -98,7 +104,10 @@ class VisitorItem extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
                         color: Colors.grey[200]),
-                    child: const Text("vst-001"),
+                    child: Text(
+                      "vst-001",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                 ],
               ),

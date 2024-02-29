@@ -12,7 +12,7 @@ class TarifView extends GetView<TarifController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondaryLight,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: SingleChildScrollView(
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +126,6 @@ class TarifView extends GetView<TarifController> {
               ),
             ),
             const SizedBox(height: 50),
-            
           ],
         ),
       ),

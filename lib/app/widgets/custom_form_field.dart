@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:visiteo/themes/app_color.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({
@@ -44,10 +45,16 @@ class CustomFormField extends StatelessWidget {
           decoration: InputDecoration(
             fillColor: Colors.white,
             hintText: hintText,
-            hintStyle: const TextStyle(fontSize: 13),
+            hintStyle:
+                TextStyle(color: Theme.of(context).hintColor, fontSize: 14),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            prefixIcon: iconData != null ? Icon(iconData) : null,
+            prefixIcon: iconData != null
+                ? Icon(
+                    iconData,
+                    color: Theme.of(context).colorScheme.primary,
+                  )
+                : null,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.grey.shade400,
