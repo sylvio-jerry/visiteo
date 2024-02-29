@@ -61,6 +61,7 @@ class VisitorListView extends GetView<VisitorListController> {
                 color: AppColor.white,
               ),
               child: TextField(
+                style: TextStyle(color: AppColor.textColorLight),
                 decoration: InputDecoration(
                     suffixIcon: Icon(
                       Icons.search,

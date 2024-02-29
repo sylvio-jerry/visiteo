@@ -42,6 +42,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
           onTap: () {
             selectDate(context);
           },
+          style: TextStyle(color: AppColor.textColorLight),
           readOnly: true,
           controller:
               widget.controller, // Utilisation du TextEditingController fourni

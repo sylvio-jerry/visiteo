@@ -37,6 +37,7 @@ class CustomFormField extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          style: TextStyle(color: AppColor.textColorLight),
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
           validator: validator,
