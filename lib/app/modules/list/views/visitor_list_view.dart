@@ -18,7 +18,7 @@ class VisitorListView extends GetView<VisitorListController> {
       body: Column(
         children: [
           Container(
-            height: 150,
+            height: 120,
             width: Get.width,
             padding: const EdgeInsets.only(left: 25, right: 25),
             decoration: BoxDecoration(
@@ -26,7 +26,9 @@ class VisitorListView extends GetView<VisitorListController> {
                   bottomRight: Radius.circular(50.0),
                   bottomLeft: Radius.circular(50.0)),
               gradient: LinearGradient(
-                begin: Alignment.topRight,
+                // begin: Alignment.topRight,
+                begin: const AlignmentDirectional(0, -1),
+                end: const AlignmentDirectional(0, 1),
                 colors: [
                   Colors.white,
                   AppColor.secondaryLight,
@@ -37,7 +39,7 @@ class VisitorListView extends GetView<VisitorListController> {
             child: SvgPicture.asset(
               "assets/images/webinar_1.svg",
               // height: 80,
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.contain,
             ),
           ),
           Transform.translate(

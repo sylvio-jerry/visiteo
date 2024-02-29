@@ -7,8 +7,8 @@ import 'package:visiteo/app/modules/tarif/views/tarif_view.dart';
 class HomeController extends GetxController {
   int selectedIndex = 0;
   final List screens = [
-     VisitorListView(),
-    const FormulaireView(),
+    VisitorListView(),
+    FormulaireView(),
     const TarifView(),
   ];
 

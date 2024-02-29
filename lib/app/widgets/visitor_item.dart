@@ -11,7 +11,7 @@ class VisitorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: 90,
+      // height: 90,
       padding: const EdgeInsets.all(10.0),
       margin: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(

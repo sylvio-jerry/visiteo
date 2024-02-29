@@ -1,23 +1,44 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FormulaireController extends GetxController {
-  //TODO: Implement FormulaireController
+  final formKey = GlobalKey<FormState>();
+  TextEditingController nomVisiteurController = TextEditingController();
+  TextEditingController tarifController = TextEditingController();
+  TextEditingController nombreJourController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  validateName(String? nom) {
+    return null;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  validateTarif(String? tarif) {
+    return null;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  validateNombreJour(String? nombreJour) {
+    return null;
   }
 
-  void increment() => count.value++;
+  validateDate(String? date) {
+    return null;
+  }
+
+ void updateDate(DateTime date) {
+    dateController.text = date.toString();
+  }
+  
+  Future onAdd() async {
+    // if (formKey.currentState!.validate()) {
+    //   Get.snackbar("Success", "L'Information a été enregistré",
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       colorText: Colors.white,
+    //       backgroundColor: Colors.green);
+    //   return;
+    // }
+    Get.snackbar("Error", nomVisiteurController.text,
+        snackPosition: SnackPosition.TOP,
+        colorText: Colors.white,
+        backgroundColor: Colors.red);
+  }
 }

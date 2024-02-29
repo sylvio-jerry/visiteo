@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_color.dart';
 
 ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
       background: AppColor.secondaryLight.withOpacity(.2),
@@ -11,7 +12,7 @@ ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: AppColor.bodyColorDark,
     hintColor: AppColor.textColorDark,
     primaryColorLight: AppColor.buttonBgColorDark,
-   textTheme: const TextTheme(
+    textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: Colors.black,
         fontSize: 40,

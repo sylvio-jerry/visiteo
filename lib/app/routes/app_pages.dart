@@ -16,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ON_BOARDING;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -26,7 +26,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ON_BOARDING,
-      page: () => OnBoardingView(),
+      page: () => const OnBoardingView(),
       binding: OnBoardingBinding(),
     ),
     GetPage(
@@ -36,7 +36,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORMULAIRE,
-      page: () => const FormulaireView(),
+      page: () => FormulaireView(),
       binding: FormulaireBinding(),
     ),
     GetPage(

@@ -1,5 +1,3 @@
-// import 'dart:ffi';
-
 class Visitor {
   String? numero;
   String nom;

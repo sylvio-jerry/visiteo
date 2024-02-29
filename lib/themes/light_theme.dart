@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_color.dart';
 
 ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme.light(
       background: AppColor.primaryLight.withOpacity(.2),
