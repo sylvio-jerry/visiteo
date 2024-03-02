@@ -7,14 +7,15 @@ import 'package:visiteo/themes/app_color.dart';
 import '../controllers/formulaire_controller.dart';
 
 class FormulaireView extends GetView<FormulaireController> {
-  FormulaireView({Key? key}) : super(key: key);
-  final formulaireController = Get.put(FormulaireController());
+  const FormulaireView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      body: SingleChildScrollView(
+    final formulaireController = Get.put(FormulaireController());
+    return Container(
+      // backgroundColor: Theme.of(context).colorScheme.secondary,
+      color: Theme.of(context).colorScheme.secondary,
+      child: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -96,7 +97,7 @@ class FormulaireView extends GetView<FormulaireController> {
               width: Get.width,
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Form(
-                key: formulaireController.formKey,
+                key: controller.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -125,10 +126,19 @@ class FormulaireView extends GetView<FormulaireController> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5.0),
                               color: Colors.white),
-                          child: Text(
-                            "vst-001",
-                            style: TextStyle(color: AppColor.textColorLight),
-                          ),
+                          child:
+                              Obx(
+                                () {
+                              return formulaireController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : Text(
+                                      formulaireController
+                                          .newNumeroVisitor.value,
+                                      style: TextStyle(
+                                          color: AppColor.textColorLight),
+                                    );
+                                },
+                              ),
                         ),
                       ],
                     ),
@@ -136,8 +146,7 @@ class FormulaireView extends GetView<FormulaireController> {
                     CustomFormField(
                       label: "Nom",
                       hintText: "nom du visiteur",
-                      validator: (nom) =>
-                          formulaireController.validateName(nom),
+                      validator: (nom) => formulaireController.validateName(nom),
                       controller: formulaireController.nomVisiteurController,
                       iconData: Icons.person,
                       keyboardType: TextInputType.name,
@@ -146,8 +155,7 @@ class FormulaireView extends GetView<FormulaireController> {
                     CustomFormField(
                       label: "Tarif Journalier",
                       hintText: "en ariary",
-                      validator: (tarif) =>
-                          formulaireController.validateTarif(tarif),
+                      validator: (tarif) => formulaireController.validateTarif(tarif),
                       controller: formulaireController.tarifController,
                       iconData: Icons.credit_card,
                       keyboardType: TextInputType.number,
@@ -183,7 +191,7 @@ class FormulaireView extends GetView<FormulaireController> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 30),
                       ),
-                      onPressed: () => formulaireController.onAdd(),
+                      onPressed: formulaireController.onAdd,
                       child: const Text(
                         "Enregistrer",
                         style: TextStyle(color: Colors.white, fontSize: 16),
@@ -201,7 +209,7 @@ class FormulaireView extends GetView<FormulaireController> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 30),
                       ),
-                      onPressed: () => formulaireController.onAdd(),
+                      onPressed: formulaireController.clearFields,
                       child: const Text(
                         "Reinitialiser",
                         style: TextStyle(color: Colors.white, fontSize: 16),

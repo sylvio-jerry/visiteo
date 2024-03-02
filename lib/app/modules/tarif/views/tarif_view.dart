@@ -11,9 +11,10 @@ class TarifView extends GetView<TarifController> {
   const TarifView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      body: SingleChildScrollView(
+    final tarifController = Get.put(TarifController());
+    return Container(
+      color: Theme.of(context).colorScheme.secondary,
+      child: SingleChildScrollView(
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,7 +65,6 @@ class TarifView extends GetView<TarifController> {
                 ),
               ),
             ]),
-            // const SizedBox(height: 5),
             Transform.translate(
               offset: const Offset(0, -50),
               child: SizedBox(
@@ -75,47 +75,47 @@ class TarifView extends GetView<TarifController> {
                     Expanded(
                       child: ListView(
                         scrollDirection: Axis.horizontal,
-                        children: [
+                        children: const [
                           Row(
                             children: [
-                              TarifItem(
-                                status: "MINIMUM",
-                                statusColor: Colors.black.withOpacity(.6),
-                                tarif: Tarif(
-                                    tarifMin: 2000,
-                                    tarifMax: 5000,
-                                    tarifTotal: 7000,
-                                    visitor: Visitor(
-                                        nom: "legend ",
-                                        tarifJournalier: 25000,
-                                        nombreJour: 7,
-                                        date: "2025")),
-                              ),
-                              TarifItem(
-                                  status: "MAXIMUMM",
-                                  statusColor: Colors.blueGrey.withOpacity(.4),
-                                  tarif: Tarif(
-                                      tarifMin: 2000,
-                                      tarifMax: 5000,
-                                      tarifTotal: 7000,
-                                      visitor: Visitor(
-                                          nom: "john doe",
-                                          tarifJournalier: 25000,
-                                          nombreJour: 7,
-                                          date: "2025"))),
-                              TarifItem(
-                                status: "TOTALE",
-                                statusColor: Colors.red.withOpacity(.7),
-                                tarif: Tarif(
-                                    tarifMin: 2000,
-                                    tarifMax: 5000,
-                                    tarifTotal: 7000,
-                                    visitor: Visitor(
-                                        nom: " dark",
-                                        tarifJournalier: 25000,
-                                        nombreJour: 7,
-                                        date: "2025")),
-                              ),
+                              // TarifItem(
+                              //   status: "MINIMUM",
+                              //   statusColor: Colors.black.withOpacity(.6),
+                              //   tarif: Tarif(
+                              //       tarifMin: 2000,
+                              //       tarifMax: 5000,
+                              //       tarifTotal: 7000,
+                              //       visitor: Visitor(
+                              //           nom: "legend ",
+                              //           tarifJournalier: 25000,
+                              //           nombreJour: 7,
+                              //           date: "2025")),
+                              // ),
+                              // TarifItem(
+                              //     status: "MAXIMUMM",
+                              //     statusColor: Colors.blueGrey.withOpacity(.4),
+                              //     tarif: Tarif(
+                              //         tarifMin: 2000,
+                              //         tarifMax: 5000,
+                              //         tarifTotal: 7000,
+                              //         visitor: Visitor(
+                              //             nom: "john doe",
+                              //             tarifJournalier: 25000,
+                              //             nombreJour: 7,
+                              //             date: "2025"))),
+                              // TarifItem(
+                              //   status: "TOTALE",
+                              //   statusColor: Colors.red.withOpacity(.7),
+                              //   tarif: Tarif(
+                              //       tarifMin: 2000,
+                              //       tarifMax: 5000,
+                              //       tarifTotal: 7000,
+                              //       visitor: Visitor(
+                              //           nom: " dark",
+                              //           tarifJournalier: 25000,
+                              //           nombreJour: 7,
+                              //           date: "2025")),
+                              // ),
                             ],
                           ),
                         ],

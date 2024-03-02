@@ -1,46 +1,39 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:visiteo/models/visitor_model.dart';
+import 'package:visiteo/services/database_helper.dart';
 
 class VisitorListController extends GetxController {
   RxList<Visitor> visitorList = <Visitor>[].obs;
 
-  TextEditingController SearchEditingController = TextEditingController();
-  RxBool isLoading = false.obs;
+
+  TextEditingController searchEditingController = TextEditingController();
+  RxBool isLoading = true.obs;
+
+// Déclaration d'un objet DatabaseHelper
+  DatabaseHelper db = DatabaseHelper();
 
   @override
   void onInit() {
     super.onInit();
-    Visitor test_1 = Visitor(
-        nom: "john legend fffffeeeefeefeffefefezzzzfefefefefzzzzzffzfzfz",
-        tarifJournalier: 25000,
-        nombreJour: 7,
-        date: "2025");
-    Visitor test_2 = Visitor(
-        nom: "Mark warol",
-        tarifJournalier: 25000,
-        nombreJour: 10,
-        date: "2023");
-    Visitor test_3 = Visitor(
-        nom: "Mark warol",
-        tarifJournalier: 25000,
-        nombreJour: 10,
-        date: "2024");
-    Visitor test_4 = Visitor(
-        nom: "Yve Jean", tarifJournalier: 900, nombreJour: 8, date: "2024");
-    visitorList.add(test_1);
-    visitorList.add(test_2);
-    visitorList.add(test_3);
-    visitorList.add(test_4);
+    // Chargez les visiteurs au démarrage
+    loadVisitorList();
   }
 
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  Future<void> loadVisitorList() async {
+    try {
+      isLoading.value = true;
+      List<Visitor> visitors = await db.getAllVisitor();
+      // Mettez à jour la liste des visiteurs et isLoading
+      visitorList.assignAll(visitors);
+      isLoading.value = false;
+      log("liste fetched here==>  $visitorList");
+    } catch (e) {
+      log('Erreur lors du chargement des visiteurs: $e');
+      isLoading.value = false;
+    }
+  }
 }

@@ -8,6 +8,7 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.put(HomeController());
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
@@ -22,21 +23,25 @@ class HomeView extends GetView<HomeController> {
         ),
         actions: [
           //toogle theme
-          GetBuilder<HomeController>(builder: (state) {
-            return IconButton(
-              onPressed: () {
-                controller.toggleTheme();
-              },
-              icon: Icon(
-                state.isDarkMode.value ? Icons.light_mode : Icons.dark_mode,
-                color: Colors.black,
-              ),
-            );
-          })
+          Obx(
+            () {
+              return IconButton(
+                onPressed: () {
+                  controller.toggleTheme();
+                },
+                icon: Icon(
+                  homeController.isDarkMode.value
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                  color: Colors.black,
+                ),
+              );
+            },
+          ),
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        index: controller.selectedIndex,
+        index: homeController.selectedIndex.value,
         height: 65.0,
         items: [
           Icon(
@@ -58,7 +63,7 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: Theme.of(context).colorScheme.secondary,
         color: Theme.of(context).colorScheme.primary.withOpacity(.5),
         animationDuration: const Duration(milliseconds: 300),
-        onTap: (index) => controller.handleBottomNav(index),
+        onTap: controller.handleBottomNav,
       ),
       drawer: SafeArea(
         child: Drawer(
@@ -107,9 +112,12 @@ class HomeView extends GetView<HomeController> {
           ]),
         ),
       ),
-      body: GetBuilder<HomeController>(builder: (state) {
-        return Container(child: state.screens[state.selectedIndex]);
-      }),
+      body: Obx(
+        () => IndexedStack(
+          index: homeController.selectedIndex.value,
+          children: homeController.screens,
+        ),
+      ),
     );
   }
 }

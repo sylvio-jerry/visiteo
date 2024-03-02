@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:visiteo/models/visitor_model.dart';
 import 'package:visiteo/themes/app_color.dart';
 
@@ -37,7 +38,7 @@ class VisitorItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                       color: AppColor.primaryLight),
                   child: Text(
-                    "MARS",
+                    DateFormat(DateFormat.ABBR_MONTH).format(visitor.date),
                     style: TextStyle(
                       color: AppColor.bodyColorLight,
                       fontWeight: FontWeight.w300,
@@ -45,15 +46,15 @@ class VisitorItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  visitor.nombreJour.toString(),
+                  DateFormat(DateFormat.DAY).format(visitor.date),
                   style: TextStyle(
                     color: AppColor.bodyColorDark,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const Text(
-                  "2025",
-                  style: TextStyle(
+                Text(
+                  DateFormat(DateFormat.YEAR).format(visitor.date),
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 68, 65, 65),
                     fontWeight: FontWeight.w300,
                   ),
@@ -105,7 +106,7 @@ class VisitorItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5.0),
                         color: Colors.grey[200]),
                     child: Text(
-                      "vst-001",
+                      visitor.numero,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),

@@ -7,16 +7,14 @@ import 'package:visiteo/models/visitor_model.dart';
 import 'package:visiteo/themes/app_color.dart';
 
 class VisitorListView extends GetView<VisitorListController> {
-  VisitorListView({Key? key}) : super(key: key);
-  final visitorController = Get.put(VisitorListController());
-  @override
+  const VisitorListView({Key? key}) : super(key: key);
+
+  // @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // extendBody: true,
-      // extendBodyBehindAppBar: true,
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      // backgroundColor: AppColor.secondaryLight,
-      body: Column(
+    final visitorController = Get.put(VisitorListController());
+    return Container(
+      color: Theme.of(context).colorScheme.secondary,
+      child: Column(
         children: [
           Container(
             height: 120,
@@ -76,7 +74,8 @@ class VisitorListView extends GetView<VisitorListController> {
             ),
           ),
           Expanded(
-            child: Obx(
+            child:
+                Obx(
               () {
                 return visitorController.isLoading.value
                     ? const Center(child: CircularProgressIndicator())

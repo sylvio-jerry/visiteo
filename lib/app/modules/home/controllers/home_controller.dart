@@ -1,25 +1,24 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:visiteo/app/modules/formulaire/views/formulaire_view.dart';
 import 'package:visiteo/app/modules/list/views/visitor_list_view.dart';
 import 'package:visiteo/app/modules/tarif/views/tarif_view.dart';
+import 'package:visiteo/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
-  int selectedIndex = 0;
+  RxInt selectedIndex = 0.obs;
   RxBool isDarkMode = false.obs;
 
-  final List screens = [
-    VisitorListView(),
-    FormulaireView(),
+  final List<Widget> screens = [
+    const VisitorListView(),
+    const FormulaireView(),
     const TarifView(),
   ];
 
   void handleBottomNav(index) {
-    print(index);
-    selectedIndex = index;
-    update();
+    log("bottom nav changed $index");
+    selectedIndex.value = index;
   }
 
   void toggleTheme() {
@@ -31,10 +30,4 @@ class HomeController extends GetxController {
     Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
     update();
   }
-
-  // void changeTheme() {
-  //   Get.changeTheme(Get.isDarkMode ? ThemeData.light : ThemeData.dark);
-
-  // }
-
 }
