@@ -81,21 +81,23 @@ class VisitorListView extends GetView<VisitorListController> {
                 return controller.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
                     : controller.visitorList.isEmpty
-                        ? Column(
-                            children: [
-                              SvgPicture.asset(
-                                "assets/images/no_data.svg",
-                                height: Get.height * .3,
-                                fit: BoxFit.cover,
-                              ),
-                              const Text(
-                                'Aucun visiteur',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
+                        ? SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/images/no_data.svg",
+                                  height: Get.height * .5,
+                                  fit: BoxFit.contain,
+                                ),
+                                const Text(
+                                  'Aucun visiteur',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
                           )
                         : ListView.builder(
-                            // shrinkWrap: true,
+                            shrinkWrap: true,
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             itemBuilder: (context, index) {
                               Visitor visitor = controller.visitorList[index];

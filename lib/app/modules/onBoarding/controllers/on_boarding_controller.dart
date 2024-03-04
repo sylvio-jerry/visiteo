@@ -34,14 +34,14 @@ class OnBoardingController extends GetxController {
       item: OnboardingInfo(
           title: "Facile à Utiliser",
           descriptions:
-              "Profitez d'une expérience fluide et moderne avec VISITEO, une interface intuitive pour une gestion sans tracas.",
+              "Profitez d'une expérience fluide et moderne, une interface intuitive pour une gestion sans tracas.",
           image: "assets/images/onboarding_3.svg"),
     ),
     OnboardingItem(
       item: OnboardingInfo(
           title: "Prêt à Démarrer",
           descriptions:
-              "Découvrez les avantages de VISITEO et commencez à optimiser la gestion de vos établissements dès aujourd'hui.",
+              "Découvrez les avantages, et commencez à optimiser la gestion de vos établissements dès aujourd'hui.",
           image: "assets/images/onboarding_4.svg"),
     ),
   ];

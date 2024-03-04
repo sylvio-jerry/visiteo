@@ -55,6 +55,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
               // if (state.currentPage == 0) return const SizedBox.shrink();
               return ElevatedButton(
                 onPressed: controller.previousPage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                ),
                 child: const Text('Précédent'),
               );
             }),
@@ -62,6 +65,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
             GetBuilder<OnBoardingController>(builder: (state) {
               return ElevatedButton(
                 onPressed: state.nextPage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                ),
                 child: Text(state.currentPage == state.pages.length - 1
                     ? 'Commencer'
                     : 'Suivant'),
