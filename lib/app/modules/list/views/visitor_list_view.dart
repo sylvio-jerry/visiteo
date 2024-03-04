@@ -9,9 +9,8 @@ import 'package:visiteo/themes/app_color.dart';
 class VisitorListView extends GetView<VisitorListController> {
   const VisitorListView({Key? key}) : super(key: key);
 
-  // @override
+  @override
   Widget build(BuildContext context) {
-    final visitorController = Get.put(VisitorListController());
     return Container(
       color: Theme.of(context).colorScheme.secondary,
       child: Column(
@@ -59,36 +58,51 @@ class VisitorListView extends GetView<VisitorListController> {
                 color: AppColor.white,
               ),
               child: TextField(
+                controller: controller.searchEditingController,
+                onChanged: (query) => controller.searchVisitors(),
                 style: TextStyle(color: AppColor.textColorLight),
                 decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: AppColor.primaryLight,
-                      size: 20.0,
-                    ),
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(
-                        color: Theme.of(context).hintColor, fontSize: 14),
-                    hintText: 'Rechercher'),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: AppColor.primaryLight,
+                    size: 20.0,
+                  ),
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                      color: Theme.of(context).hintColor, fontSize: 14),
+                  hintText: 'Rechercher',
+                ),
               ),
             ),
           ),
           Expanded(
-            child:
-                Obx(
-              () {
-                return visitorController.isLoading.value
+            child: GetX<VisitorListController>(
+              builder: (controller) {
+                return controller.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        // shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        itemBuilder: (context, index) {
-                          Visitor visitor =
-                              visitorController.visitorList[index];
-                          return VisitorItem(visitor: visitor);
-                        },
-                        itemCount: visitorController.visitorList.length,
-                      );
+                    : controller.visitorList.isEmpty
+                        ? Column(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/images/no_data.svg",
+                                height: Get.height * .3,
+                                fit: BoxFit.cover,
+                              ),
+                              const Text(
+                                'Aucun visiteur',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          )
+                        : ListView.builder(
+                            // shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            itemBuilder: (context, index) {
+                              Visitor visitor = controller.visitorList[index];
+                              return VisitorItem(visitor: visitor);
+                            },
+                            itemCount: controller.visitorList.length,
+                          );
               },
             ),
           ),

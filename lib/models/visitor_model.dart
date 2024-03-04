@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Visitor {
   final int? id;
   final String numero;
@@ -35,4 +37,15 @@ class Visitor {
         'date': date.toIso8601String(),
       };
 
+  int getTarif() {
+    return tarifJournalier * nombreJour;
+  }
+
+  String getFormattedTarif() {
+    // Formatez le tarif avec le format '###,###,###'
+    int tarif_ = getTarif();
+    String tarifFormatted =
+        "${NumberFormat('#,##0', 'fr_FR').format(tarif_)} Ar";
+    return tarifFormatted;
+  }
 }

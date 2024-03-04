@@ -1,31 +1,39 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
+import 'package:visiteo/app/modules/list/controllers/visitor_list_controller.dart';
+import 'package:visiteo/services/database_helper.dart';
+import 'package:visiteo/models/tarif_model.dart';
 
 class TarifController extends GetxController {
-  //TODO: Implement TarifController
+  Rx<Tarif?> tarif = Rx<Tarif?>(null);
+  DatabaseHelper db = DatabaseHelper();
+  RxString visitorLength = "".obs;
 
-
-
-  final count = 0.obs;
   @override
   void onInit() {
-    //
-    log("tarif view initialize");
     super.onInit();
+    fetchVisitorTarif();
+    getVisitorCount();
   }
 
-  @override
-  void onReady() {
-    log("tarif view onReady");
-    super.onReady();
+  Future<void> fetchVisitorTarif() async {
+    try {
+      Tarif? fetchedTarif = await db.getVisitorTarif();
+      tarif.value = fetchedTarif;
+      log('tarif.value got: ${tarif.value}');
+    } catch (e) {
+      log('Erreur lors de la récupération du tarif des visiteurs: $e');
+      tarif.value = null;
+    }
   }
 
-  @override
-  void onClose() {
-    log("tarif view closed");
-    super.onClose();
+  Future<void> getVisitorCount() async {
+    try {
+      int count = await db.getVisitorCount();
+      visitorLength.value = count.toString();
+      log('Nombre total de visiteurs: $count');
+    } catch (e) {
+      log('Erreur lors de la récupération du nombre de visiteurs: $e');
+    }
   }
-
-  void increment() => count.value++;
 }

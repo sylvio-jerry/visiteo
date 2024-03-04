@@ -32,17 +32,14 @@ class AppPages {
     GetPage(
       name: _Paths.TARIF,
       page: () => const TarifView(),
-      binding: TarifBinding(),
     ),
     GetPage(
       name: _Paths.FORMULAIRE,
       page: () => const FormulaireView(),
-      binding: FormulaireBinding(),
     ),
     GetPage(
       name: _Paths.VISITOR_LIST,
       page: () => const VisitorListView(),
-      binding: VisitorListBinding(),
     ),
   ];
 }

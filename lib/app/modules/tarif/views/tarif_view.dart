@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
-import 'package:visiteo/models/tarif_model.dart';
 import 'package:visiteo/themes/app_color.dart';
 import '../controllers/tarif_controller.dart';
 import 'package:visiteo/app/widgets/tarif_item.dart';
-import 'package:visiteo/models/visitor_model.dart';
 
 class TarifView extends GetView<TarifController> {
   const TarifView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final tarifController = Get.put(TarifController());
     return Container(
       color: Theme.of(context).colorScheme.secondary,
       child: SingleChildScrollView(
@@ -73,52 +69,48 @@ class TarifView extends GetView<TarifController> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: const [
-                          Row(
+                      child: GetX<TarifController>(
+                        builder: (controller) {
+                          return ListView(
+                            scrollDirection: Axis.horizontal,
                             children: [
-                              // TarifItem(
-                              //   status: "MINIMUM",
-                              //   statusColor: Colors.black.withOpacity(.6),
-                              //   tarif: Tarif(
-                              //       tarifMin: 2000,
-                              //       tarifMax: 5000,
-                              //       tarifTotal: 7000,
-                              //       visitor: Visitor(
-                              //           nom: "legend ",
-                              //           tarifJournalier: 25000,
-                              //           nombreJour: 7,
-                              //           date: "2025")),
-                              // ),
-                              // TarifItem(
-                              //     status: "MAXIMUMM",
-                              //     statusColor: Colors.blueGrey.withOpacity(.4),
-                              //     tarif: Tarif(
-                              //         tarifMin: 2000,
-                              //         tarifMax: 5000,
-                              //         tarifTotal: 7000,
-                              //         visitor: Visitor(
-                              //             nom: "john doe",
-                              //             tarifJournalier: 25000,
-                              //             nombreJour: 7,
-                              //             date: "2025"))),
-                              // TarifItem(
-                              //   status: "TOTALE",
-                              //   statusColor: Colors.red.withOpacity(.7),
-                              //   tarif: Tarif(
-                              //       tarifMin: 2000,
-                              //       tarifMax: 5000,
-                              //       tarifTotal: 7000,
-                              //       visitor: Visitor(
-                              //           nom: " dark",
-                              //           tarifJournalier: 25000,
-                              //           nombreJour: 7,
-                              //           date: "2025")),
-                              // ),
+                              Row(
+                                children: [
+                                  TarifItem(
+                                    status: "MINIMUM",
+                                    statusColor: Colors.black.withOpacity(.6),
+                                    tarifAmount:
+                                        controller.tarif.value?.getMinTarif ??
+                                            "",
+                                    visitorDetail: controller
+                                            .tarif.value?.minVisitor.numero ??
+                                        "",
+                                  ),
+                                  TarifItem(
+                                    status: "MAXIMUM",
+                                    statusColor:
+                                        Colors.blueGrey.withOpacity(.4),
+                                    tarifAmount:
+                                        controller.tarif.value?.getMaxTarif ??
+                                            "",
+                                    visitorDetail: controller
+                                            .tarif.value?.maxVisitor.numero ??
+                                        "",
+                                  ),
+                                  TarifItem(
+                                    status: "TOTALE",
+                                    statusColor: Colors.red.withOpacity(.7),
+                                    tarifAmount:
+                                        controller.tarif.value?.getTotalTarif ??
+                                            "",
+                                    visitorDetail:
+                                        "${controller.visitorLength} Visiteur(s)",
+                                  ),
+                                ],
+                              ),
                             ],
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                   ],

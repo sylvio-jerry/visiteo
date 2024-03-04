@@ -1,31 +1,31 @@
 import 'package:visiteo/models/visitor_model.dart';
 
 class Tarif {
-  int tarifMin;
-  int tarifMax;
-  int tarifTotal;
-  final Visitor visitor;
-  Tarif(
-      {required this.tarifMin,
-      required this.tarifMax,
-      required this.tarifTotal,
-      required this.visitor});
+  final int minTarif;
+  final int maxTarif;
+  final int totalTarif;
+  final Visitor minVisitor;
+  final Visitor maxVisitor;
+
+  Tarif({
+    required this.minTarif,
+    required this.maxTarif,
+    required this.totalTarif,
+    required this.minVisitor,
+    required this.maxVisitor,
+  });
+
+  String get getMinTarif => minTarif.toString();
+  String get getMaxTarif => maxTarif.toString();
+  String get getTotalTarif => totalTarif.toString();
 
   factory Tarif.fromJson(Map<String, dynamic> json) {
     return Tarif(
-      tarifMin: json['tarifMin'],
-      tarifMax: json['tarifMax'],
-      tarifTotal: json['tarifTotal'],
-      visitor: json['visitor'],
+      minTarif: json['min_tarif'],
+      maxTarif: json['max_tarif'],
+      totalTarif: json['total_tarif'],
+      minVisitor: Visitor.fromJson(json['min_visitor']),
+      maxVisitor: Visitor.fromJson(json['max_visitor']),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['tarifMin'] = tarifMin;
-    data['tarifMax'] = tarifMax;
-    data['tarifTotal'] = tarifTotal;
-    data['visitor'] = visitor;
-    return data;
   }
 }

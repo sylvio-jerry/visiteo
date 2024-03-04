@@ -4,6 +4,7 @@ import 'package:visiteo/models/visitor_model.dart';
 import 'package:visiteo/services/database_helper.dart';
 import 'dart:developer';
 import 'package:intl/intl.dart';
+import 'package:visiteo/app/modules/home/controllers/home_controller.dart';
 
 class FormulaireController extends GetxController {
   // Déclaration d'un objet DatabaseHelper
@@ -22,6 +23,9 @@ class FormulaireController extends GetxController {
   //loading new numero
   RxBool isLoading = true.obs;
 
+  //visitorToUpdate
+  Rx<Visitor?> visitorToUpdate = Rx<Visitor?>(null);
+
   @override
   void onReady() {
     log("onReady called inside formulaire_controller");
@@ -31,11 +35,11 @@ class FormulaireController extends GetxController {
 
   @override
   void onClose() {
-    log("FormulaireController onclose called");
-    clearFields();
     super.onClose();
+    log("closed  => FormulaireController");
   }
 
+  //validation formulaire
   String? validateName(String? nom) {
     if (nom == null || nom.isEmpty) {
       return "Veuillez entrer le nom du visiteur";
@@ -70,42 +74,34 @@ class FormulaireController extends GetxController {
     return null;
   }
 
-  Future<void> onAdd() async {
-    if (formKey.currentState!.validate()) {
-      // Si la validation réussit, vous pouvez procéder à l'ajout du visiteur
-      // Utilisez les valeurs des contrôleurs pour créer un nouvel objet Visitor
-      Visitor newVisitor = Visitor(
-        nom: nomVisiteurController.text,
-        tarifJournalier: int.parse(tarifController.text),
-        nombreJour: int.parse(nombreJourController.text),
-        numero: newNumeroVisitor.value,
-        date: DateFormat('dd/MM/yyyy').parse(dateController.text),
-      );
-
-      // Ajoutez le visiteur à la base de données ou effectuez toute autre opération requise
-      await db.insertVisitor(newVisitor);
-
-      // Affichez un message de succès
-      Get.snackbar("Success", "L'information a été enregistrée",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.white,
-          backgroundColor: Colors.green);
-      clearFields();
-      await getNewNumero();
-    } else {
-      // Si la validation échoue, affichez les messages d'erreur appropriés
-      Get.snackbar("Erreur", "Veuillez corriger les erreurs dans le formulaire",
-          snackPosition: SnackPosition.TOP,
-          colorText: Colors.white,
-          backgroundColor: Colors.red);
-    }
+  void resetVisitorToUpdate() {
+    visitorToUpdate.value = null;
+    log("reset formulaire called");
+    return;
   }
 
   void clearFields() {
+    // Réinitialiser la validation des champs et valeur  des  champs
+    formKey.currentState?.reset();
     nomVisiteurController.clear();
     tarifController.clear();
     nombreJourController.clear();
     dateController.clear();
+    return;
+  }
+
+  void setVisitorToUpdate() {
+    if (visitorToUpdate.value != null) {
+      nomVisiteurController.text = visitorToUpdate.value?.nom ?? "";
+      tarifController.text =
+          visitorToUpdate.value?.tarifJournalier.toString() ?? "";
+      nombreJourController.text =
+          visitorToUpdate.value?.nombreJour.toString() ?? "";
+      newNumeroVisitor.value = visitorToUpdate.value?.numero.toString() ?? "";
+      dateController.text =
+          DateFormat('dd/MM/yyyy').format(visitorToUpdate.value!.date);
+    }
+    return;
   }
 
   Future<String> getNewNumero() async {
@@ -116,5 +112,57 @@ class FormulaireController extends GetxController {
     isLoading.value = false;
     log("getNewNumero  in formulaireView==> $newNum");
     return newNum;
+  }
+
+  Future<void> onSubmit() async {
+    if (formKey.currentState!.validate()) {
+      if (visitorToUpdate.value == null) {
+        // Si aucun argument n'est passé, cela signifie qu'il s'agit d'un nouvel ajout
+        // Utiliser les valeurs des contrôleurs pour créer un nouvel objet Visitor
+        Visitor newVisitor = Visitor(
+          nom: nomVisiteurController.text,
+          tarifJournalier: int.parse(tarifController.text),
+          nombreJour: int.parse(nombreJourController.text),
+          numero: newNumeroVisitor.value,
+          date: DateFormat('dd/MM/yyyy').parse(dateController.text),
+        );
+
+        // Ajouter le visiteur à la base de données ou effectuer toute autre opération requise
+        await db.insertVisitor(newVisitor);
+        clearFields();
+      } else {
+        final homeController = Get.find<HomeController>();
+        // S'il y a des arguments, cela signifie qu'il s'agit d'une mise à jour
+        // Utiliser les valeurs des contrôleurs pour mettre à jour le visiteur existant
+        Visitor updatedVisitor = Visitor(
+          id: visitorToUpdate.value!.id,
+          nom: nomVisiteurController.text,
+          tarifJournalier: int.parse(tarifController.text),
+          nombreJour: int.parse(nombreJourController.text),
+          numero: newNumeroVisitor.value,
+          date: DateFormat('dd/MM/yyyy').parse(dateController.text),
+        );
+
+        // Mettre à jour le visiteur dans la base de données ou effectuer toute autre opération requise
+        await db.updateVisitor(updatedVisitor);
+        clearFields();
+        homeController.handleBottomNav(0);
+      }
+
+      // Afficher un message de succès
+      Get.snackbar("Success", "L'information a été enregistrée",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.green);
+
+      // handle bottom navbar
+    } else {
+      // Si la validation échoue, afficher les messages d'erreur appropriés
+      Get.snackbar("Erreur", "Veuillez corriger les erreurs dans le formulaire",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.red);
+      resetVisitorToUpdate();
+    }
   }
 }

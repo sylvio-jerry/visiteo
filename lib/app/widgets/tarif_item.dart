@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:visiteo/models/tarif_model.dart';
 import 'package:visiteo/themes/app_color.dart';
+import 'package:visiteo/models/tarif_model.dart';
 import 'package:visiteo/app/widgets/tarif_information.dart';
 
 class TarifItem extends StatelessWidget {
@@ -9,12 +9,16 @@ class TarifItem extends StatelessWidget {
     super.key,
     required this.statusColor,
     required this.status,
-    required this.tarif,
+    required this.tarifAmount,
+    required this.visitorDetail,
+    this.tarif,
   });
 
   final Color statusColor;
   final String status;
-  final Tarif tarif;
+  final String tarifAmount;
+  final String visitorDetail;
+  final Tarif? tarif;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +89,7 @@ class TarifItem extends StatelessWidget {
                           color: statusColor.withOpacity(.6),
                         ),
                         child: Text(
-                          "123545 Ariary",
+                          tarifAmount,
                           style: TextStyle(
                             color: AppColor.bodyColorLight,
                             fontWeight: FontWeight.w300,
@@ -98,7 +102,7 @@ class TarifItem extends StatelessWidget {
                         padding: const EdgeInsets.all(5.0),
                         decoration: BoxDecoration(color: AppColor.primaryDark),
                         child: Text(
-                          "VST-001",
+                          visitorDetail,
                           style: TextStyle(
                             color: AppColor.bodyColorLight,
                             fontWeight: FontWeight.w300,
@@ -118,6 +122,7 @@ class TarifItem extends StatelessWidget {
   }
 
   void showTarifInformation(BuildContext context) {
+    if (status == "TOTALE") return;
     showModalBottomSheet(
       showDragHandle: true,
       enableDrag: true,
@@ -128,7 +133,7 @@ class TarifItem extends StatelessWidget {
       ),
       context: context,
       builder: (BuildContext context) {
-        return TarifInformation(tarif: tarif);
+        return TarifInformation(status: status);
       },
     );
   }
