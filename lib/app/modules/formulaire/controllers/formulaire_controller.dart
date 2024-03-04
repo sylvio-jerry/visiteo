@@ -28,15 +28,8 @@ class FormulaireController extends GetxController {
 
   @override
   void onReady() {
-    log("onReady called inside formulaire_controller");
     getNewNumero();
     super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    log("closed  => FormulaireController");
   }
 
   //validation formulaire
@@ -76,7 +69,6 @@ class FormulaireController extends GetxController {
 
   void resetVisitorToUpdate() {
     visitorToUpdate.value = null;
-    log("reset formulaire called");
     return;
   }
 
@@ -106,11 +98,9 @@ class FormulaireController extends GetxController {
 
   Future<String> getNewNumero() async {
     isLoading.value = true;
-    log("getNewNumero  function called");
     String newNum = await db.generateNumero();
     newNumeroVisitor.value = newNum;
     isLoading.value = false;
-    log("getNewNumero  in formulaireView==> $newNum");
     return newNum;
   }
 
@@ -129,6 +119,7 @@ class FormulaireController extends GetxController {
 
         // Ajouter le visiteur à la base de données ou effectuer toute autre opération requise
         await db.insertVisitor(newVisitor);
+        getNewNumero();
         clearFields();
       } else {
         final homeController = Get.find<HomeController>();
