@@ -5,13 +5,11 @@ import 'package:get/get.dart';
 import 'package:visiteo/app/modules/onBoarding/views/on_boarding_view.dart';
 import 'package:visiteo/models/onboarding_info.dart';
 import 'package:visiteo/app/routes/app_pages.dart';
-import 'package:get_storage/get_storage.dart';
 
 class OnBoardingController extends GetxController {
   int currentPage = 0;
   // RxInt currentPage = 0.obs;
   RxBool isLastPage = false.obs;
-  final box = GetStorage();
 
   final PageController pageController = PageController();
 
@@ -57,7 +55,7 @@ class OnBoardingController extends GetxController {
 
   void nextPage() {
     if (currentPage == pages.length - 1) {
-      completeOnBoarding();
+      Get.offNamed(Routes.HOME);
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -71,13 +69,5 @@ class OnBoardingController extends GetxController {
       duration: const Duration(milliseconds: 300),
       curve: Curves.ease,
     );
-  }
-
-  // Méthode appelée lorsque l'utilisateur a terminé l'écran d'onBoarding
-  void completeOnBoarding() {
-    // Stockez une valeur booléenne pour indiquer que l'utilisateur a terminé l'écran d'onBoarding
-    box.write('isFirstTime', true);
-    // Redirigez l'utilisateur vers l'écran principal (HOME)
-    Get.offNamed(Routes.HOME);
   }
 }

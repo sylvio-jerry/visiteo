@@ -17,14 +17,7 @@ class VisitorListController extends GetxController {
   void onInit() {
     super.onInit();
     // Chargez les visiteurs au démarrage
-    log("initialiaztion => VisitorListController");
     loadVisitorList();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    log("closed  => VisitorListController");
   }
 
   Future<void> loadVisitorList() async {
@@ -34,7 +27,6 @@ class VisitorListController extends GetxController {
       // Mettez à jour la liste des visiteurs et isLoading
       visitorList.assignAll(visitors);
       isLoading.value = false;
-      log("liste fetched here==>  $visitorList");
     } catch (e) {
       log('Erreur lors du chargement des visiteurs: $e');
       isLoading.value = false;

@@ -22,26 +22,16 @@ class HomeController extends GetxController {
     const TarifView(),
   ];
 
-  @override
-  void onClose() {
-    super.onClose();
-    log("closed  => VisitorListController");
-  }
-
   void handleBottomNav(index) {
-    log("bottom nav changed $index");
     selectedIndex = index;
     if (index == 0) {
-      log("index changed to $index");
       visitorListController.resetSearch();
       visitorListController.loadVisitorList();
       formulaireController.resetVisitorToUpdate();
       formulaireController.clearFields();
       formulaireController.getNewNumero();
     } else if (index == 1) {
-      log("index changed to $index");
     } else if (index == 2) {
-      log("index changed to $index");
       tarifController.fetchVisitorTarif();
       tarifController.getVisitorCount();
       formulaireController.resetVisitorToUpdate();

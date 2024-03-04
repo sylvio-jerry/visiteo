@@ -20,7 +20,6 @@ class TarifController extends GetxController {
     try {
       Tarif? fetchedTarif = await db.getVisitorTarif();
       tarif.value = fetchedTarif;
-      log('tarif.value got: ${tarif.value}');
     } catch (e) {
       log('Erreur lors de la récupération du tarif des visiteurs: $e');
       tarif.value = null;
@@ -31,7 +30,6 @@ class TarifController extends GetxController {
     try {
       int count = await db.getVisitorCount();
       visitorLength.value = count.toString();
-      log('Nombre total de visiteurs: $count');
     } catch (e) {
       log('Erreur lors de la récupération du nombre de visiteurs: $e');
     }
