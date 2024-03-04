@@ -9,8 +9,6 @@ import '../controllers/on_boarding_controller.dart';
 class OnBoardingView extends GetView<OnBoardingController> {
   const OnBoardingView({Key? key}) : super(key: key);
 
-  // final pages = Get.find<OnBoardingController>().pages;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
